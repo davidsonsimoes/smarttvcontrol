@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { View, SafeAreaView } from 'react-native'
 import { NativeRouter, Route } from 'react-router-native'
 
+
 import ConnectToTv from './src/pages/connect-to-tv'
 import Control from './src/pages/control'
 
