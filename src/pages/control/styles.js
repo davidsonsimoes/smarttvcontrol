@@ -25,7 +25,6 @@ export const ButtonDiv = styled.View`
 `
 
 export const UpAndDownDiv = styled.View`
-    flex: ;
     text-align: center;
 `
 
