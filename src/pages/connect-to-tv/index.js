@@ -1,36 +1,34 @@
 import React, {Component} from 'react';
 import { View, Text } from 'react-native';
 import { Link } from "react-router-native";
-import styled from 'styled-components';
 
+import styles from './stylesheet/stylesheet';
 
 
 
 export default class ConnectToTv extends Component {
   render() {
     return (
-      <View>
-          <Text>Connect To Tv Page</Text>
-          <Link to="/control">
-          <ConnectButton>
-
-          </ConnectButton>
-          </Link>
+      <View style={styles.container}>
+        <Link to="/control" underlayColor="#f0f4f7">
+          <View style={styles.connectButton}></View>
+        </Link>
+        <Text>Toque para conectar a TV</Text>
       </View>
+      // <View style={styles.container}>
+      //   <View style={styles.item1}>
+      //   <Text style={{fontSize:20, color:"#fff"}}>Item number 1</Text>
+      //   </View>
+      //   <View style={styles.item2}>
+      //   <Text style={{fontSize:20, color:"#fff"}}>Item number 1</Text>
+      //   </View>
+      //   <View style={styles.item3}>
+      //   <Text style={{fontSize:20, color:"#fff"}}>Item number 1</Text>
+      //   </View>
+      //   <View style={styles.item4}>
+      //   <Text style={{fontSize:20, color:"#fff"}}>Item number 1</Text>
+      //   </View>
+      // </View>
     );
   }
 }
-
-
-const ConnectButton = styled.View`
-  position: relative;
-  top: 50%;
-  left: 50%;
-  margin-left: -50px;
-  margin-top: -50px;
-  display: flex;
-  width: 100px;
-  height: 100px;
-  font-size: 1px;
-  background: #5a99d4;
-`;
