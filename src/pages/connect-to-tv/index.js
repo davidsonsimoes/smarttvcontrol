@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { View, Text, Button, TouchableOpacity } from 'react-native';
-import { Link } from "react-router-native";
+import DeviceInfo from 'react-native-device-info';
 import Pulse from 'react-native-pulse';
 import { db } from '../utils/firebase';
 
@@ -11,7 +11,9 @@ import styles from './stylesheet/stylesheet';
 export default class ConnectToTv extends Component {
   constructor(props) {
     super(props);
-    this.state = {smartTv: ''};
+    this.state = {
+      smartTv: ''
+    };
   }
   getTvData() {
     db.on('value', (snapshot) => {
@@ -25,7 +27,8 @@ export default class ConnectToTv extends Component {
   }
   onConnect() {
     db.update({
-      smarttvcontrol: true
+      smarttvcontrol: true,
+      mobile: DeviceInfo.getDeviceName()
     })
   }
 
