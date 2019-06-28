@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
     connectButton: {
         alignItems: 'center',
         backgroundColor: 'red',
-        padding: 10
+        padding: 10,
+        marginTop: 25
     }
 });
 

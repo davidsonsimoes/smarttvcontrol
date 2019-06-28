@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { View, Text, Button, TouchableOpacity } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import Pulse from 'react-native-pulse';
+import { Redirect } from "react-router-native";
 import { db } from '../utils/firebase';
 
 import styles from './stylesheet/stylesheet';
@@ -12,7 +13,8 @@ export default class ConnectToTv extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      smartTv: ''
+      smartTv: '',
+      tvSelected: false
     };
   }
   getTvData() {
@@ -20,7 +22,8 @@ export default class ConnectToTv extends Component {
       const messageObject = snapshot.val();
       if (messageObject) {
         this.setState({
-          smartTv: messageObject.smarttv
+          smartTv: messageObject.smarttv,
+          tvSelected: messageObject.isConected
         });
       }
     })
@@ -34,25 +37,28 @@ export default class ConnectToTv extends Component {
 
   render() {
     const tvFound = this.state.smartTv;
+    const tvSelected = this.state.tvSelected;
     let buttonOrLabbel;
+
+    if (tvSelected === true) {
+      return <Redirect to='/control' />
+    }
 
     if (tvFound == '') {
       buttonOrLabbel = <Text>Nenhuma TV encontrada.</Text>;
     } else {
       buttonOrLabbel = (
       <TouchableOpacity style={styles.connectButton} onPress={() => this.onConnect()}>
-        <Text>{this.state.smartTv}</Text>
+        <Text style={{ color: 'white' }}>{this.state.smartTv}</Text>
       </TouchableOpacity>
       );
     }
     return (
       <View style={styles.container}>
-        {/* <Link to="/control" underlayColor="#f0f4f7"> */}
-          <TouchableOpacity style={styles.findTvButton} title="Change" onPress={() => this.getTvData()}>
-            <Pulse color='red' numPulses={3} diameter={200} speed={20} duration={1000} />
-          </TouchableOpacity>
-        {/* </Link> */}
-        <Text>Toque para conectar a TV Atual {this.state.smartTv}</Text> 
+        <TouchableOpacity style={styles.findTvButton} title="Change" onPress={() => this.getTvData()}>
+          <Pulse color='red' numPulses={3} diameter={200} speed={20} duration={1000} />
+        </TouchableOpacity>
+        <Text>Toque para conectar a TV</Text> 
         {buttonOrLabbel}
       </View>
     );
